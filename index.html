@@ -120,8 +120,9 @@ a{color:inherit}
   grid-template-columns:repeat(2,1fr);
 }
 @media (min-width:720px){
-  .looks{grid-template-columns:repeat(3,1fr)}
+  .looks{grid-template-columns:repeat(4,1fr)}
   .looks figure:first-child{grid-column:span 2;grid-row:span 2}
+  .looks figure:nth-child(4){grid-column:span 2}
 }
 .looks figure{margin:0;position:relative;border-radius:var(--r);overflow:hidden;background:var(--surface)}
 .looks img{
@@ -211,6 +212,7 @@ footer{
       <figure><img src="img/look-02.jpg" alt="Yerin in a vintage market look" loading="lazy" width="825" height="1100"></figure>
       <figure><img src="img/look-03.jpg" alt="Yerin standing at a cafe window" loading="lazy" width="825" height="1100"></figure>
       <figure><img src="img/portrait.jpg" alt="Studio portrait of Yerin" loading="lazy" width="821" height="1100"></figure>
+      <figure><img src="img/look-04.jpg" alt="Yerin in a technical outerwear look on the street" loading="lazy" width="619" height="1100"></figure>
     </div>
   </section>
 
