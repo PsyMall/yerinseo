@@ -3,39 +3,39 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Yerin Seo · what she's wearing</title>
+<title>Yerin Seo</title>
 <meta name="description" content="Fashion, decoded. One outfit a day, why it works, and where to find it.">
 <meta property="og:title" content="Yerin Seo">
 <meta property="og:description" content="Fashion, decoded. One outfit a day.">
-<meta property="og:image" content="https://yerinseo.com/img/look-01.jpg">
+<meta property="og:image" content="https://yerinseo.com/img/hero.jpg">
 <meta property="og:url" content="https://yerinseo.com">
-<meta name="theme-color" content="#0e0d0c" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#f4f1ec" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23283146'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' fill='%23ffffff' text-anchor='middle'%3EY%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Archivo:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=melodrama@400,500,700&display=swap" rel="stylesheet">
 <style>
+/* Palette read off the reference Moti picked (curated.design/store/pheebs):
+   the template's own chrome is white paper + one navy ink, and every colour
+   on the page arrives through the photography. The pastel stops below are
+   sampled pixels from the store page's presentation wash. */
 :root{
-  --ink:#14120f;
-  --paper:#f4f1ec;
-  --muted:#6f6862;
-  --hair:#ddd6cc;
-  --surface:#ffffff;
-  --pop:#1f4ed8;
-  --r:14px;
-}
-:root:not([data-theme="light"]){
-  color-scheme:light dark;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --ink:#f2efe9;
-    --paper:#0e0d0c;
-    --muted:#9d958c;
-    --hair:#2b2724;
-    --surface:#171513;
-    --pop:#7fa0ff;
-  }
+  color-scheme:light;            /* committed single look, like the reference */
+  --paper:#ffffff;
+  --ink:#283146;                 /* sampled from the live template */
+  --muted:#5a6173;
+  --hair:#e2e4ec;
+  --tint:#f2f3f7;
+  --blush:#f9e0ed;
+  --lilac:#f6ecf4;
+  --sky:#cde3ea;
+  --peri:#d2d3e9;
+  --r:16px;
+  --gut:20px;
+  --display:"Melodrama",Georgia,"Times New Roman",serif;
+  --sans:Inter,ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -43,218 +43,218 @@ body{
   margin:0;
   background:var(--paper);
   color:var(--ink);
-  font:400 16px/1.6 Archivo,ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font:400 16px/1.6 var(--sans);
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
 }
 img{max-width:100%;display:block}
 a{color:inherit}
-
-.shell{max-width:960px;margin:0 auto;padding-inline:20px}
-
-/* ---------- hero: asymmetric, image-led ---------- */
-.hero{
-  padding-block:clamp(28px,7vw,72px) clamp(40px,8vw,88px);
-  display:grid;
-  gap:clamp(22px,4vw,44px);
-  grid-template-columns:1fr;
+.shell{max-width:1120px;margin:0 auto;padding-inline:var(--gut)}
+.label{
+  font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--muted);font-weight:500;margin:0;
 }
-@media (min-width:820px){
-  .hero{grid-template-columns:1.05fr .95fr;align-items:end}
+
+/* ---------- hero: the name on the wash, the photograph rising into it ---------- */
+.wash{
+  background:
+    radial-gradient(120% 90% at 10% 0%,   var(--blush) 0%, rgba(249,224,237,0) 58%),
+    radial-gradient(110% 85% at 90% 6%,   var(--peri)  0%, rgba(210,211,233,0) 60%),
+    radial-gradient(130% 75% at 50% 100%, var(--sky)   0%, rgba(205,227,234,0) 68%),
+    var(--paper);
 }
-.hero-copy{display:flex;flex-direction:column;gap:18px}
+.hero{padding-block:clamp(26px,6vw,54px) 0;display:grid;gap:clamp(18px,3vw,30px)}
+@media (min-width:900px){
+  .hero{grid-template-columns:1fr .82fr;align-items:end;gap:clamp(28px,4vw,56px)}
+}
+.hero-copy{display:flex;flex-direction:column;gap:14px}
 .wordmark{
-  font-family:"Bricolage Grotesque",Archivo,sans-serif;
-  font-weight:800;
-  font-size:clamp(46px,12vw,96px);
-  line-height:.88;
-  letter-spacing:-.045em;
+  font-family:var(--display);
+  font-weight:500;
+  font-size:clamp(58px,16vw,132px);
+  line-height:.92;
+  letter-spacing:-.015em;
   margin:0;
+  padding-bottom:.06em;          /* descender reserve for the display face */
 }
-.wordmark span{display:block}
-.wordmark .b{color:var(--muted)}
 .claim{
-  font-family:"Bricolage Grotesque",Archivo,sans-serif;
-  font-weight:600;
-  font-size:clamp(19px,2.5vw,25px);
-  line-height:1.25;
-  letter-spacing:-.02em;
-  margin:0;
-  max-width:22ch;
+  font-family:var(--display);
+  font-weight:400;
+  font-size:clamp(21px,3vw,30px);
+  line-height:1.24;
+  margin:0;max-width:20ch;
 }
-.sub{margin:0;color:var(--muted);font-size:15px;max-width:34ch}
-
-.hero-figure{position:relative}
+.sub{margin:0;color:var(--muted);font-size:15px;max-width:32ch}
+.hero-figure{margin:0;position:relative}
 .hero-figure img{
   width:100%;
+  height:auto;
   aspect-ratio:4/5;
-  max-height:62svh;
+  max-height:60svh;
   object-fit:cover;
-  object-position:50% 18%;
+  object-position:50% 22%;
   border-radius:var(--r);
 }
-@media (min-width:820px){
-  .hero-figure img{aspect-ratio:3/4;max-height:none}
+@media (min-width:900px){
+  .hero-figure img{aspect-ratio:4/5;max-height:none}
 }
-.hero-figure figcaption{
-  margin-top:10px;
-  font-size:13px;
-  color:var(--muted);
-}
+.hero-figure figcaption{margin-top:10px;font-size:13px;color:var(--muted)}
 
-/* ---------- looks ---------- */
-.band{border-top:1px solid var(--hair);padding-block:clamp(34px,6vw,64px)}
+/* ---------- looks: a rail you swipe, the way the reference does it ---------- */
+.band{padding-block:clamp(36px,6vw,72px)}
 .band-head{
   display:flex;align-items:baseline;justify-content:space-between;
-  gap:16px;margin-bottom:22px;flex-wrap:wrap;
+  gap:16px;margin-bottom:20px;flex-wrap:wrap;
 }
 .band-head h2{
-  font-family:"Bricolage Grotesque",Archivo,sans-serif;
-  font-weight:600;font-size:clamp(22px,3.4vw,30px);
-  letter-spacing:-.025em;margin:0;
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(26px,4.2vw,40px);margin:0;line-height:1.1;
+  padding-bottom:.04em;
 }
-.band-head .when{font-size:13px;color:var(--muted)}
+.hint{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);
+  letter-spacing:.14em;text-transform:uppercase}
+.hint svg{opacity:.55}
 
-.looks{
-  display:grid;gap:14px;
-  grid-template-columns:repeat(2,1fr);
+.rail{
+  display:flex;gap:12px;
+  margin-inline:calc(-1 * var(--gut));
+  padding-inline:var(--gut);
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-padding-inline:var(--gut);
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
 }
-@media (min-width:720px){
-  .looks{grid-template-columns:repeat(4,1fr)}
-  .looks figure:first-child{grid-column:span 2;grid-row:span 2}
-  .looks figure:nth-child(4){grid-column:span 2}
+.rail::-webkit-scrollbar{display:none}
+.rail figure{
+  margin:0;flex:0 0 74%;scroll-snap-align:start;
+  border-radius:var(--r);overflow:hidden;background:var(--tint);
 }
-.looks figure{margin:0;position:relative;border-radius:var(--r);overflow:hidden;background:var(--surface)}
-.looks img{
-  width:100%;height:100%;aspect-ratio:3/4;object-fit:cover;
-  transition:transform .6s cubic-bezier(.16,1,.3,1);
+@media (min-width:640px){ .rail figure{flex-basis:42%} }
+@media (min-width:1000px){
+  .rail figure{flex-basis:calc((100% - 76px) / 4)}
+  .hint{display:none}
 }
-.looks figure:first-child img{aspect-ratio:auto;height:100%}
-@media (hover:hover){ .looks figure:hover img{transform:scale(1.035)} }
+.rail img{
+  width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;
+  transition:transform .7s cubic-bezier(.16,1,.3,1);
+}
+@media (hover:hover){ .rail figure:hover img{transform:scale(1.04)} }
 
-/* ---------- the shelf (empty state, deliberate) ---------- */
-.shelf{
-  border:1px solid var(--hair);
-  border-radius:var(--r);
-  padding:clamp(24px,5vw,40px);
-  background:var(--surface);
-  display:grid;gap:14px;
-  max-width:56ch;
-}
-.shelf h3{
-  font-family:"Bricolage Grotesque",Archivo,sans-serif;
-  font-weight:600;font-size:20px;letter-spacing:-.02em;margin:0;
-}
+/* ---------- the shelf: an empty state that says "coming", not "unfinished" ---------- */
+.shelf-band{background:var(--tint)}
+.shelf{display:grid;gap:14px;max-width:54ch}
+.shelf h3{font-family:var(--display);font-weight:400;font-size:clamp(22px,3.2vw,30px);
+  margin:0;line-height:1.15;padding-bottom:.04em}
 .shelf p{margin:0;color:var(--muted);font-size:15px}
-.rail{display:flex;gap:8px;margin-top:4px}
-.rail i{
-  display:block;height:4px;flex:1;border-radius:99px;background:var(--hair);
-}
-.rail i:first-child{background:var(--pop);flex:0 0 42px}
+.progress{display:flex;gap:7px;margin-top:6px;max-width:280px}
+.progress i{display:block;height:5px;flex:1;border-radius:99px;background:#d9dce6}
+.progress i:first-child{background:var(--ink);flex:0 0 46px}
 
 /* ---------- follow ---------- */
-.follow{
-  display:grid;gap:10px;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-}
+.follow{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
 .follow a{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:12px;text-decoration:none;
-  border:1px solid var(--hair);border-radius:var(--r);
-  padding:16px 18px;background:var(--surface);
-  font-weight:500;
-  transition:border-color .2s ease,transform .2s cubic-bezier(.16,1,.3,1);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  text-decoration:none;border:1px solid var(--hair);border-radius:var(--r);
+  padding:17px 19px;background:var(--paper);font-weight:500;
+  transition:border-color .2s ease,transform .18s cubic-bezier(.16,1,.3,1);
 }
-.follow a:hover{border-color:var(--pop)}
+.follow a:hover{border-color:var(--ink)}
 .follow a:active{transform:scale(.985)}
 .follow .who{font-size:13px;color:var(--muted);font-weight:400}
-.follow svg{flex:0 0 auto;opacity:.5}
+.follow svg{flex:0 0 auto;opacity:.45}
 
 footer{
-  border-top:1px solid var(--hair);
-  padding-block:26px 40px;
+  border-top:1px solid var(--hair);padding-block:24px 40px;
   color:var(--muted);font-size:13px;
   display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
 }
 
-/* ---------- motion, motivated: content enters in reading order ---------- */
+/* ---------- motion: content enters in reading order, nothing loops ---------- */
 @media (prefers-reduced-motion:no-preference){
-  .rise{animation:rise .7s cubic-bezier(.16,1,.3,1) both}
-  .rise:nth-of-type(2){animation-delay:.06s}
-  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-  .io .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.16,1,.3,1)}
+  .rise{animation:rise .8s cubic-bezier(.16,1,.3,1) both}
+  .rise.d1{animation-delay:.08s}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  /* Hidden-then-revealed only once the observer is known to exist. A bare
+     opacity:0 here blanked every section below the fold on the first build. */
+  .io .reveal{opacity:0;transform:translateY(20px);
+    transition:opacity .8s ease,transform .8s cubic-bezier(.16,1,.3,1)}
   .io .reveal.in{opacity:1;transform:none}
 }
 </style>
 </head>
 <body>
 
-<main class="shell">
-
-  <section class="hero">
-    <div class="hero-copy rise">
-      <h1 class="wordmark"><span>Yerin</span><span class="b">Seo</span></h1>
-      <p class="claim">Fashion, decoded. One outfit a day, and why it works.</p>
-      <p class="sub">Every piece she wears, tracked down and linked.</p>
+<section class="wash">
+  <div class="shell">
+    <div class="hero">
+      <div class="hero-copy rise">
+        <p class="label">Fashion, decoded</p>
+        <h1 class="wordmark">Yerin Seo</h1>
+        <p class="claim">One outfit a day, and why it works.</p>
+        <p class="sub">Every piece she wears, tracked down and linked.</p>
+      </div>
+      <figure class="hero-figure rise d1">
+        <img src="img/hero.jpg" alt="Yerin on painted steps in layered denim over a white tank" fetchpriority="high" width="1100" height="1375">
+      </figure>
     </div>
-    <figure class="hero-figure rise">
-      <img src="img/look-01.jpg" alt="Yerin in a grey zip vest over a white poplin shirt with wide black trousers" fetchpriority="high" width="618" height="1100">
-      <figcaption>Grey vest, white poplin, wide black leg.</figcaption>
-    </figure>
-  </section>
+  </div>
+</section>
 
-  <section class="band reveal">
-    <div class="band-head">
-      <h2>Recent looks</h2>
-      <span class="when">Updated daily</span>
-    </div>
-    <div class="looks">
-      <figure><img src="img/look-02.jpg" alt="Yerin in a vintage market look" loading="lazy" width="825" height="1100"></figure>
-      <figure><img src="img/look-03.jpg" alt="Yerin standing at a cafe window" loading="lazy" width="825" height="1100"></figure>
-      <figure><img src="img/portrait.jpg" alt="Studio portrait of Yerin" loading="lazy" width="821" height="1100"></figure>
-      <figure><img src="img/look-04.jpg" alt="Yerin in a technical outerwear look on the street" loading="lazy" width="619" height="1100"></figure>
-    </div>
-  </section>
+<section class="band shell reveal">
+  <div class="band-head">
+    <h2>Recent looks</h2>
+    <span class="hint">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg>
+      Swipe
+    </span>
+  </div>
+  <div class="rail">
+    <figure><img src="img/look-a.jpg" alt="Yerin in a red slip dress against red silk curtains" loading="lazy" width="900" height="1200"></figure>
+    <figure><img src="img/look-b.jpg" alt="Yerin in a teal pleated gown at a waterfall" loading="lazy" width="900" height="1200"></figure>
+    <figure><img src="img/look-c.jpg" alt="Yerin in a graffiti-print puffer on a neon-lit street" loading="lazy" width="900" height="1200"></figure>
+    <figure><img src="img/look-d.jpg" alt="Yerin in a butter-yellow slip dress in golden light" loading="lazy" width="900" height="1200"></figure>
+  </div>
+</section>
 
-  <section class="band reveal">
+<section class="shelf-band reveal">
+  <div class="band shell">
     <div class="shelf">
-      <h3>The shelf is being stocked</h3>
-      <p>Each look gets broken down here into the pieces that make it, with a link to buy. First drop lands with the next set of looks.</p>
-      <div class="rail" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <p class="label">The shelf</p>
+      <h3>Being stocked right now</h3>
+      <p>Each look gets broken down here into the pieces that make it, with a link to buy. The first drop lands with the next set of looks.</p>
+      <div class="progress" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="band reveal">
-    <div class="band-head"><h2>Follow</h2></div>
-    <nav class="follow">
-      <a href="https://www.instagram.com/yerinseo.kr/" rel="me noopener" target="_blank">
-        <span>Instagram<br><span class="who">@yerinseo.kr</span></span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
-      </a>
-      <a href="https://www.tiktok.com/@yerinseokr" rel="me noopener" target="_blank">
-        <span>TikTok<br><span class="who">@yerinseokr</span></span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
-      </a>
-      <a href="https://www.youtube.com/@yerinseo" rel="me noopener" target="_blank">
-        <span>YouTube<br><span class="who">@yerinseo</span></span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
-      </a>
-    </nav>
-  </section>
+<section class="band shell reveal">
+  <div class="band-head"><h2>Follow</h2></div>
+  <nav class="follow">
+    <a href="https://www.instagram.com/yerinseo.kr/" rel="me noopener" target="_blank">
+      <span>Instagram<br><span class="who">@yerinseo.kr</span></span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+    </a>
+    <a href="https://www.tiktok.com/@yerinseokr" rel="me noopener" target="_blank">
+      <span>TikTok<br><span class="who">@yerinseokr</span></span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+    </a>
+    <a href="https://www.youtube.com/@yerinseo" rel="me noopener" target="_blank">
+      <span>YouTube<br><span class="who">@yerinseo</span></span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+    </a>
+  </nav>
+</section>
 
+<div class="shell">
   <footer>
     <span>Yerin Seo</span>
     <span>Some links earn a commission at no extra cost to you.</span>
   </footer>
-
-</main>
+</div>
 
 <script>
 (() => {
-  // The sections are visible by default. We only opt into hiding-then-revealing
-  // once we know the observer exists and motion is welcome - otherwise a failed
-  // observer leaves the whole page blank, which is exactly what happened on the
-  // first build.
   if (!('IntersectionObserver' in window) ||
       window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
@@ -264,7 +264,7 @@ footer{
     for (const en of entries) {
       if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
     }
-  }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
+  }, { threshold: 0.06, rootMargin: '0px 0px -5% 0px' });
   els.forEach(e => io.observe(e));
 
   // Safety net: nothing stays hidden for more than a moment, whatever happens.
