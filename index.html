@@ -4,92 +4,260 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yerin Seo — what she's wearing</title>
-<meta name="description" content="Fashion, decoded. The pieces from each look, and where to find them.">
-<meta property="og:title" content="Yerin Seo — what she's wearing">
-<meta property="og:description" content="Fashion, decoded.">
+<meta name="description" content="Fashion, decoded. One outfit a day, why it works, and where to find it.">
+<meta property="og:title" content="Yerin Seo">
+<meta property="og:description" content="Fashion, decoded. One outfit a day.">
+<meta property="og:image" content="https://yerinseo.com/img/look-01.jpg">
+<meta property="og:url" content="https://yerinseo.com">
+<meta name="theme-color" content="#0e0d0c" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f1ec" media="(prefers-color-scheme: light)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Archivo:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#faf8f6; --ink:#14110f; --muted:#6b625c;
-    --line:#e6e0da; --card:#fff; --accent:#8c2f2f;
+:root{
+  --ink:#14120f;
+  --paper:#f4f1ec;
+  --muted:#6f6862;
+  --hair:#ddd6cc;
+  --surface:#ffffff;
+  --pop:#1f4ed8;
+  --r:14px;
+}
+:root:not([data-theme="light"]){
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ink:#f2efe9;
+    --paper:#0e0d0c;
+    --muted:#9d958c;
+    --hair:#2b2724;
+    --surface:#171513;
+    --pop:#7fa0ff;
   }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --bg:#131110; --ink:#f3efec; --muted:#a39a94;
-      --line:#2a2522; --card:#1c1917; --accent:#d98b8b;
-    }
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0; background:var(--bg); color:var(--ink);
-    font:16px/1.55 ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:520px; margin:0 auto; padding:40px 20px 64px}
-  header{text-align:center; margin-bottom:34px}
-  .name{font-size:26px; font-weight:650; letter-spacing:-.02em; margin:0 0 6px}
-  .tag{color:var(--muted); font-size:15px; margin:0}
-  .loc{color:var(--muted); font-size:13px; margin:10px 0 0; letter-spacing:.04em}
-  h2{
-    font-size:12px; letter-spacing:.12em; text-transform:uppercase;
-    color:var(--muted); font-weight:600; margin:34px 0 12px;
-  }
-  a.item{
-    display:flex; align-items:center; gap:14px; text-decoration:none; color:inherit;
-    background:var(--card); border:1px solid var(--line); border-radius:14px;
-    padding:14px 16px; margin-bottom:10px; transition:transform .12s ease, border-color .12s ease;
-  }
-  a.item:hover{transform:translateY(-1px); border-color:var(--accent)}
-  .thumb{
-    width:46px; height:46px; border-radius:10px; flex:0 0 auto;
-    background:linear-gradient(135deg,var(--line),var(--bg));
-    display:grid; place-items:center; font-size:19px;
-  }
-  .lines{min-width:0}
-  .t{font-weight:600; font-size:15px; display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
-  .s{color:var(--muted); font-size:13px; display:block; margin-top:2px}
-  .arrow{margin-left:auto; color:var(--muted); flex:0 0 auto}
-  .social{display:flex; justify-content:center; gap:10px; margin-top:30px; flex-wrap:wrap}
-  .social a{
-    text-decoration:none; color:var(--muted); font-size:13px;
-    border:1px solid var(--line); border-radius:999px; padding:7px 14px;
-  }
-  .social a:hover{color:var(--ink); border-color:var(--accent)}
-  footer{margin-top:38px; text-align:center; color:var(--muted); font-size:12px; line-height:1.7}
-  .empty{
-    border:1px dashed var(--line); border-radius:14px; padding:18px 16px;
-    color:var(--muted); font-size:14px; text-align:center;
-  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font:400 16px/1.6 Archivo,ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+
+.shell{max-width:960px;margin:0 auto;padding-inline:20px}
+
+/* ---------- hero: asymmetric, image-led ---------- */
+.hero{
+  padding-block:clamp(28px,7vw,72px) clamp(40px,8vw,88px);
+  display:grid;
+  gap:clamp(22px,4vw,44px);
+  grid-template-columns:1fr;
+}
+@media (min-width:820px){
+  .hero{grid-template-columns:1.05fr .95fr;align-items:end}
+}
+.hero-copy{display:flex;flex-direction:column;gap:18px}
+.wordmark{
+  font-family:"Bricolage Grotesque",Archivo,sans-serif;
+  font-weight:800;
+  font-size:clamp(46px,12vw,96px);
+  line-height:.88;
+  letter-spacing:-.045em;
+  margin:0;
+}
+.wordmark span{display:block}
+.wordmark .b{color:var(--muted)}
+.claim{
+  font-family:"Bricolage Grotesque",Archivo,sans-serif;
+  font-weight:600;
+  font-size:clamp(19px,2.5vw,25px);
+  line-height:1.25;
+  letter-spacing:-.02em;
+  margin:0;
+  max-width:22ch;
+}
+.sub{margin:0;color:var(--muted);font-size:15px;max-width:34ch}
+
+.hero-figure{position:relative}
+.hero-figure img{
+  width:100%;
+  aspect-ratio:3/4;
+  object-fit:cover;
+  object-position:50% 22%;
+  border-radius:var(--r);
+}
+.hero-figure figcaption{
+  margin-top:10px;
+  font-size:13px;
+  color:var(--muted);
+}
+
+/* ---------- looks ---------- */
+.band{border-top:1px solid var(--hair);padding-block:clamp(34px,6vw,64px)}
+.band-head{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:16px;margin-bottom:22px;flex-wrap:wrap;
+}
+.band-head h2{
+  font-family:"Bricolage Grotesque",Archivo,sans-serif;
+  font-weight:600;font-size:clamp(22px,3.4vw,30px);
+  letter-spacing:-.025em;margin:0;
+}
+.band-head .when{font-size:13px;color:var(--muted)}
+
+.looks{
+  display:grid;gap:14px;
+  grid-template-columns:repeat(2,1fr);
+}
+@media (min-width:720px){
+  .looks{grid-template-columns:repeat(3,1fr)}
+  .looks figure:first-child{grid-column:span 2;grid-row:span 2}
+}
+.looks figure{margin:0;position:relative;border-radius:var(--r);overflow:hidden;background:var(--surface)}
+.looks img{
+  width:100%;height:100%;aspect-ratio:3/4;object-fit:cover;
+  transition:transform .6s cubic-bezier(.16,1,.3,1);
+}
+.looks figure:first-child img{aspect-ratio:auto;height:100%}
+@media (hover:hover){ .looks figure:hover img{transform:scale(1.035)} }
+
+/* ---------- the shelf (empty state, deliberate) ---------- */
+.shelf{
+  border:1px solid var(--hair);
+  border-radius:var(--r);
+  padding:clamp(24px,5vw,40px);
+  background:var(--surface);
+  display:grid;gap:14px;
+  max-width:56ch;
+}
+.shelf h3{
+  font-family:"Bricolage Grotesque",Archivo,sans-serif;
+  font-weight:600;font-size:20px;letter-spacing:-.02em;margin:0;
+}
+.shelf p{margin:0;color:var(--muted);font-size:15px}
+.rail{display:flex;gap:8px;margin-top:4px}
+.rail i{
+  display:block;height:4px;flex:1;border-radius:99px;background:var(--hair);
+}
+.rail i:first-child{background:var(--pop);flex:0 0 42px}
+
+/* ---------- follow ---------- */
+.follow{
+  display:grid;gap:10px;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+}
+.follow a{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;text-decoration:none;
+  border:1px solid var(--hair);border-radius:var(--r);
+  padding:16px 18px;background:var(--surface);
+  font-weight:500;
+  transition:border-color .2s ease,transform .2s cubic-bezier(.16,1,.3,1);
+}
+.follow a:hover{border-color:var(--pop)}
+.follow a:active{transform:scale(.985)}
+.follow .who{font-size:13px;color:var(--muted);font-weight:400}
+.follow svg{flex:0 0 auto;opacity:.5}
+
+footer{
+  border-top:1px solid var(--hair);
+  padding-block:26px 40px;
+  color:var(--muted);font-size:13px;
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+}
+
+/* ---------- motion, motivated: content enters in reading order ---------- */
+@media (prefers-reduced-motion:no-preference){
+  .rise{animation:rise .7s cubic-bezier(.16,1,.3,1) both}
+  .rise:nth-of-type(2){animation-delay:.06s}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.16,1,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <header>
-    <p class="name">Yerin Seo</p>
-    <p class="tag">Fashion, decoded.</p>
-    <p class="loc">ONE OUTFIT A DAY</p>
-  </header>
+<main class="shell">
 
-  <h2>This week's look</h2>
+  <section class="hero">
+    <div class="hero-copy rise">
+      <h1 class="wordmark"><span>Yerin</span><span class="b">Seo</span></h1>
+      <p class="claim">Fashion, decoded. One outfit a day, and why it works.</p>
+      <p class="sub">Every piece she wears, tracked down and linked.</p>
+    </div>
+    <figure class="hero-figure rise">
+      <img src="img/look-01.jpg" alt="Yerin in a grey zip vest over a white poplin shirt with wide black trousers" fetchpriority="high" width="618" height="1100">
+      <figcaption>Grey vest, white poplin, wide black leg.</figcaption>
+    </figure>
+  </section>
 
-  <!-- PRODUCTS GO HERE.
-       One block per item. Replace href with the tracked affiliate link.
-       Keep the shape: thumb emoji, title, one short line of why it works. -->
-  <div class="empty">
-    Pieces from this week's looks land here.
-  </div>
+  <section class="band reveal">
+    <div class="band-head">
+      <h2>Recent looks</h2>
+      <span class="when">Updated daily</span>
+    </div>
+    <div class="looks">
+      <figure><img src="img/look-02.jpg" alt="Yerin in a vintage market look" loading="lazy" width="825" height="1100"></figure>
+      <figure><img src="img/look-03.jpg" alt="Yerin standing at a cafe window" loading="lazy" width="825" height="1100"></figure>
+      <figure><img src="img/portrait.jpg" alt="Studio portrait of Yerin" loading="lazy" width="821" height="1100"></figure>
+    </div>
+  </section>
 
-  <h2>Find her</h2>
-  <div class="social">
-    <a href="https://www.instagram.com/yerinseo.kr/" rel="me">Instagram</a>
-    <a href="https://www.tiktok.com/@yerinseokr" rel="me">TikTok</a>
-    <a href="https://www.youtube.com/@yerinseo" rel="me">YouTube</a>
-  </div>
+  <section class="band reveal">
+    <div class="shelf">
+      <h3>The shelf is being stocked</h3>
+      <p>Each look gets broken down here into the pieces that make it, with a link to buy. First drop lands with the next set of looks.</p>
+      <div class="rail" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    </div>
+  </section>
+
+  <section class="band reveal">
+    <div class="band-head"><h2>Follow</h2></div>
+    <nav class="follow">
+      <a href="https://www.instagram.com/yerinseo.kr/" rel="me noopener" target="_blank">
+        <span>Instagram<br><span class="who">@yerinseo.kr</span></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </a>
+      <a href="https://www.tiktok.com/@yerinseokr" rel="me noopener" target="_blank">
+        <span>TikTok<br><span class="who">@yerinseokr</span></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@yerinseo" rel="me noopener" target="_blank">
+        <span>YouTube<br><span class="who">@yerinseo</span></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </a>
+    </nav>
+  </section>
 
   <footer>
-    Some links may earn a commission at no extra cost to you.
+    <span>Yerin Seo</span>
+    <span>Some links earn a commission at no extra cost to you.</span>
   </footer>
 
-</div>
+</main>
+
+<script>
+(() => {
+  const els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window) ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    els.forEach(e => e.classList.add('in'));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    for (const en of entries) {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    }
+  }, { threshold: 0.12 });
+  els.forEach(e => io.observe(e));
+})();
+</script>
 </body>
 </html>
