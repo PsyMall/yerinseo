@@ -159,7 +159,22 @@ a{color:inherit}
 .items .what{display:grid;gap:3px}
 .items .nm{font-weight:500;line-height:1.3}
 .items .who{font-size:13px;color:var(--muted)}
+.items .desc{font-size:13px;color:var(--muted);line-height:1.45}
+/* A named action reads as an offer; a bare arrow reads as navigation. */
+.items .go{
+  flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:500;letter-spacing:.02em;white-space:nowrap;
+  border:1px solid var(--hair);border-radius:999px;padding:8px 13px;
+}
+.items a:hover .go{border-color:var(--ink)}
+.items .go svg{opacity:.55}
 .items svg{flex:0 0 auto;opacity:.45}
+@media (max-width:520px){
+  .items a{flex-direction:column;align-items:flex-start;gap:12px}
+  .items .go{align-self:stretch;justify-content:center}
+}
+.maker{margin:0;font-size:14px}
+.maker a{font-weight:500}
 .plain{font-size:13px;color:var(--muted);margin-top:4px}
 
 /* ---------- follow ---------- */
@@ -239,23 +254,28 @@ footer{
     <div class="shelf">
       <p class="label">The shelf</p>
       <h2>What she is wearing</h2>
+      <p class="maker">Every piece here is made by
+        <a href="/shop" rel="noopener">Yacxilan Artwear</a>, an independent
+        artwear house. The photographs on their pages are the real garments.</p>
       <ul class="items">
         <li>
-          <a href="https://yacxilanartwear.com/products/jacket-sleeveless-hooded-velvet-waterproof-mayan-codex" rel="noopener nofollow" target="_blank">
+          <a href="/jacket" rel="noopener">
             <span class="what">
-              <span class="nm">Sleeveless Hooded Jacket, Mayan Codex</span>
+              <span class="nm">Sleeveless Hooded Jacket &mdash; Mayan Codex</span>
               <span class="who">Yacxilan Artwear &nbsp;&middot;&nbsp; &euro;235</span>
+              <span class="desc">Velvet waterproof outer with a 100% viscose lining. Sizes XS&ndash;2XL.</span>
             </span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+            <span class="go">Buy at Yacxilan <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
           </a>
         </li>
         <li>
-          <a href="https://yacxilanartwear.com/products/long-leggings-woman-bamboo-jersey-veg-dye-veg-print-charcoal-sandsotime" rel="noopener nofollow" target="_blank">
+          <a href="/leggings" rel="noopener">
             <span class="what">
-              <span class="nm">Long Leggings, Sandsotime Charcoal</span>
+              <span class="nm">Long Leggings &mdash; Sandsotime Charcoal</span>
               <span class="who">Yacxilan Artwear &nbsp;&middot;&nbsp; &euro;44</span>
+              <span class="desc">Organic bamboo jersey, vegetable dyed and vegetable printed. No fixatives, no chemicals. Cold wash, no tumble dryer. Sizes XS&ndash;XL.</span>
             </span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+            <span class="go">Buy at Yacxilan <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
           </a>
         </li>
       </ul>
