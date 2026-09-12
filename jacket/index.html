@@ -40,6 +40,15 @@ h1{font-size:clamp(21px,4vw,26px);line-height:1.25;margin:0 0 4px;font-weight:60
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MQ8PVH2VNM"></script>
 <script>
   window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+  // Consent Mode, denied by default. This is the documented mechanism and it is
+  // the one that actually works: GA4 then sends COOKIELESS PINGS - it counts the
+  // page view and the event, and writes nothing to the device. `client_storage`
+  // alone did NOT stop the cookies; measured on the live site, _ga and
+  // _ga_<id> were still being set with that flag present and correct.
+  gtag('consent','default',{
+    analytics_storage:'denied', ad_storage:'denied',
+    ad_user_data:'denied', ad_personalization:'denied'
+  });
   gtag('js',new Date());
   gtag('config','G-MQ8PVH2VNM',{client_storage:'none',anonymize_ip:true,allow_google_signals:false,allow_ad_personalization_signals:false});
 </script>

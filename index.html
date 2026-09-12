@@ -240,6 +240,10 @@ footer{
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MQ8PVH2VNM"></script>
 <script>
   window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+  gtag('consent','default',{
+    analytics_storage:'denied', ad_storage:'denied',
+    ad_user_data:'denied', ad_personalization:'denied'
+  });
   gtag('js',new Date());
   gtag('config','G-MQ8PVH2VNM',{client_storage:'none',anonymize_ip:true,allow_google_signals:false,allow_ad_personalization_signals:false});
   // One named event per product, so the report answers "which piece" and not
