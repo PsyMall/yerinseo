@@ -78,8 +78,9 @@ footer{
 
   <div class="key">
     <p><strong>The short version.</strong> This site measures how many people open it and
-    which garment they click. It sets <strong>no cookies</strong> and stores nothing on your
-    device. It has no accounts, no forms, no newsletter and no way to contact you. It does
+    which garment they click. It sets <strong>no cookies</strong>. The only thing it ever
+    stores on your device is a single preference, and only if you ask it to: if you turn the
+    measurement off below, that choice is remembered so it stays off. It has no accounts, no forms, no newsletter and no way to contact you. It does
     send some technical information about your visit to Google Analytics, and the companies
     that host the site and serve its fonts see your IP address, which is unavoidable for any
     website.</p>
@@ -91,9 +92,13 @@ footer{
 
   <h2>What the website measures, precisely</h2>
   <p>The site uses <strong>Google Analytics 4</strong> (property G-MQ8PVH2VNM) on the home
-  page and on the three garment pages. It is configured <strong>without storage</strong>, so
-  no analytics cookie is written and no identifier is kept on your device between visits.
-  What is sent to Google on a page view is:</p>
+  page and on the three garment pages. Google&rsquo;s consent signal is set to
+  <strong>denied</strong> before the tag loads, which means it sends what Google calls a
+  cookieless ping: <strong>no cookie is written and nothing is kept on your device between
+  visits.</strong> Measured on the live site on 12 September 2026, a fresh visit leaves no
+  cookie at all. A one-off random number is generated for each page load and sent with the
+  request, but it is not stored, so the same browser looks like a different one next time and
+  cannot be followed. What reaches Google is:</p>
   <div class="wrap">
   <table>
     <tr><th>What</th><th>Example</th></tr>
