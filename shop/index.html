@@ -5,40 +5,63 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yacxilan Artwear &middot; Yerin Seo</title>
 <meta name="robots" content="noindex,follow">
-<link rel="canonical" href="https://yacxilanartwear.com/collections/all">
-<!-- No-JS fallback. The JS path below fires sooner; this one always fires. -->
-<meta http-equiv="refresh" content="2;url=https://yacxilanartwear.com/collections/all">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{color-scheme:light}
-body{margin:0;min-height:100svh;display:grid;place-items:center;
-  background:#fff;color:#283146;padding:24px;
+:root{color-scheme:light;--paper:#fff;--ink:#283146;--muted:#5a6173;--hair:#e2e4ec;--tint:#f6ecf4}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
   font:400 16px/1.6 Inter,ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif}
-.card{max-width:34ch;text-align:center}
-p{margin:0 0 6px}
-.small{font-size:13px;color:#5a6173}
+main{max-width:34rem;margin:0 auto;padding:clamp(20px,5vw,44px) 20px 48px}
 a{color:inherit}
+.back{display:inline-block;font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;margin-bottom:22px}
+.back:hover{color:var(--ink)}
+figure{margin:0 0 18px;border-radius:16px;overflow:hidden;background:var(--tint)}
+figure img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover}
+h1{font-size:clamp(21px,4vw,26px);line-height:1.25;margin:0 0 4px;font-weight:600}
+.who{margin:0 0 14px;color:var(--muted);font-size:14px}
+.desc{margin:0 0 20px;color:var(--muted);font-size:15px}
+.buy{display:flex;align-items:center;justify-content:center;gap:9px;
+  text-decoration:none;font-weight:500;background:var(--ink);color:#fff;
+  border-radius:999px;padding:16px 22px;margin:0 0 14px}
+.buy:active{transform:scale(.99)}
+.note{margin:0;font-size:13px;color:var(--muted)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
 </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MQ8PVH2VNM"></script>
 <script>
   window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
   gtag('js',new Date());
-  gtag('config','G-MQ8PVH2VNM',{transport_type:'beacon'});
-  // One named event per product, so the report answers "which piece" and not
-  // only "how many". The page path answers it too; the event is the one that
-  // survives someone changing the path later.
-  gtag('event','shop_click',{item:'shop',destination:'yacxilan'});
+  gtag('config','G-MQ8PVH2VNM',{client_storage:'none',anonymize_ip:true});
 </script>
 </head>
 <body>
-<div class="card">
-  <p>Taking you to <strong>Yacxilan Artwear</strong>&hellip;</p>
-  <p class="small">Yacxilan Artwear</p>
-  <p class="small">Not moving? <a href="https://yacxilanartwear.com/collections/all">Open it here</a>.</p>
-</div>
+<main>
+  <a class="back" href="/">&#8592; Yerin Seo</a>
+  <figure><img src="/img/shelf-jacket.jpg" alt="The hooded jacket worn, hood up, showing the studded shoulders and the front zip" width="900" height="1200"></figure>
+  <h1>Yacxilan Artwear</h1>
+  <p class="who">Yacxilan Artwear</p>
+  <p class="desc">Everything Yerin wears from this maker, on their own site.</p>
+  <a class="buy" id="go" href="https://yacxilanartwear.com/collections/all" rel="noopener">Buy at Yacxilan
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+  <p class="note">This photograph is AI-generated and will not match the real garment
+  exactly. The pictures on Yacxilan&rsquo;s own page are what the piece actually looks
+  like. Nothing is sold from this site and we do not hold stock or confirm availability.
+  <a href="/terms">Terms</a>.</p>
+</main>
 <script>
-  // 700ms so the measurement beacon leaves before the page is replaced, and
-  // replace() rather than assign() so Back returns to the post, not to here.
-  setTimeout(function(){ location.replace("https://yacxilanartwear.com/collections/all"); }, 700);
+(function(){
+  var a=document.getElementById('go');
+  if(!a||typeof gtag!=='function')return;
+  a.addEventListener('click',function(){
+    // Fire and forget. The browser keeps a keepalive request alive across the
+    // navigation, and nothing here delays the visitor by even a frame.
+    try{gtag('event','shop_click',{item:'shop',destination:'yacxilan'});}catch(e){}
+  });
+})();
 </script>
 </body>
 </html>
