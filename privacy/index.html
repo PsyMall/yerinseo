@@ -58,6 +58,10 @@ th,td{text-align:left;vertical-align:top;padding:9px 10px;border-bottom:1px soli
 th{font-weight:600}
 .wrap{overflow-x:auto}
 :focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
+button{font:inherit;font-weight:500;background:var(--ink);color:#fff;border:0;
+  border-radius:999px;padding:11px 18px;cursor:pointer}
+button[disabled]{background:var(--muted);cursor:default}
+#optstate{margin-left:10px;font-size:14px;color:var(--muted)}
 footer{
   border-top:1px solid var(--hair);margin-top:52px;padding-top:22px;
   color:var(--muted);font-size:13px;
@@ -114,6 +118,17 @@ footer{
   blocks Google Analytics will stop it completely, and the site works exactly the same without
   it. Nothing here is required for the page to function.</p>
 
+
+  <h2>Turning the measurement off</h2>
+  <div class="key">
+    <p>One click, no account, free, and it sticks on this browser.</p>
+    <p><button type="button" id="optout">Turn analytics off for me</button>
+    <span id="optstate" role="status"></span></p>
+    <p class="when" style="margin:8px 0 0">This stores one small preference on your own
+    device so the choice is remembered. Nothing else is stored, and the preference is never
+    sent anywhere.</p>
+  </div>
+
   <h2>Who else sees something, and what</h2>
   <div class="wrap">
   <table>
@@ -162,10 +177,12 @@ footer{
   <p>The credential Google issues is stored on the owner&rsquo;s own computer and is used only
   to call Google. Channel statistics and comment text are kept locally for writing replies and
   tracking how the channel is doing.</p>
-  <p><strong>Nothing read through these APIs is sold, rented, shared with any third party, used
-  for advertising, or used to build a profile of anyone.</strong> No human other than the
-  channel owner reads it, and it is not transferred to any other service. Use of information
-  received from Google APIs follows the
+  <p><strong>Nothing read through these APIs is sold, rented, used for advertising, or used to
+  build a profile of anyone.</strong> No human other than the channel owner reads it. One
+  transfer does happen and is worth stating plainly: the owner drafts replies to comments with
+  the help of an AI assistant, so the text of a public comment being replied to is sent to that
+  assistant&rsquo;s provider for that purpose and nothing else. Aggregate channel statistics are
+  not. Use of information received from Google APIs follows the
   <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API
   Services User Data Policy</a>, including its Limited Use requirements.</p>
 
@@ -195,5 +212,24 @@ footer{
   <footer>Yerin Seo &nbsp;&middot;&nbsp; <a href="/terms">Terms</a></footer>
 
 </main>
+<script>
+(function(){
+  var KEY='yerinseo-analytics-off', FLAG='ga-disable-G-MQ8PVH2VNM';
+  var b=document.getElementById('optout'), s=document.getElementById('optstate');
+  function off(){ try{return localStorage.getItem(KEY)==='1'}catch(e){return false} }
+  function paint(){
+    if(off()){ window[FLAG]=true; b.disabled=true; b.textContent='Analytics is off';
+               s.textContent='Nothing is being measured on this browser.'; }
+    else { s.textContent=''; }
+  }
+  // Applied before anything else on this page, and this page carries no tag anyway.
+  if(off()) window[FLAG]=true;
+  b.addEventListener('click',function(){
+    try{ localStorage.setItem(KEY,'1'); }catch(e){}
+    window[FLAG]=true; paint();
+  });
+  paint();
+})();
+</script>
 </body>
 </html>

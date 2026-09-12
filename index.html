@@ -232,6 +232,11 @@ footer{
 }
 </style>
 <!-- measurement -->
+<script>
+  // Honour an opt-out chosen on the privacy page before the tag can fire.
+  try{ if(localStorage.getItem('yerinseo-analytics-off')==='1')
+        window['ga-disable-G-MQ8PVH2VNM']=true; }catch(e){}
+</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MQ8PVH2VNM"></script>
 <script>
   window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}

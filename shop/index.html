@@ -31,6 +31,12 @@ h1{font-size:clamp(21px,4vw,26px);line-height:1.25;margin:0 0 4px;font-weight:60
 .note{margin:0;font-size:13px;color:var(--muted)}
 :focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
 </style>
+<script>
+  // Honour an opt-out chosen on the privacy page before the tag can fire.
+  // Braces are doubled because this block goes through str.format.
+  try{ if(localStorage.getItem('yerinseo-analytics-off')==='1')
+        window['ga-disable-G-MQ8PVH2VNM']=true; }catch(e){}
+</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MQ8PVH2VNM"></script>
 <script>
   window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
@@ -51,7 +57,7 @@ h1{font-size:clamp(21px,4vw,26px);line-height:1.25;margin:0 0 4px;font-weight:60
   exactly. The pictures on Yacxilan&rsquo;s own page are what the piece actually looks
   like, and the price and sizes here were read from that page on 12 September 2026.
   Nothing is sold from this site, and stock, price and availability are answered only
-  on the maker&rsquo;s own page at the moment you look. <a href="/terms">Terms</a>.</p>
+  on the maker&rsquo;s own page at the moment you look. <a href="/terms">Terms</a> &middot; <a href="/privacy">Privacy</a>.</p>
 </main>
 <script>
 (function(){
