@@ -86,7 +86,8 @@ h1{font-size:clamp(21px,4vw,26px);line-height:1.25;margin:0 0 4px;font-weight:60
   <h1>Hooded Long Dress &mdash; AYAWASKA</h1>
   <p class="who">Yacxilan Artwear</p>
   <p class="desc">Viscose / All Over Digital Print<br><br>Note: All pieces are randomly cut from the printed textiles and details of the prints might not be always same place as in the picture. that makes every piece unique.<br><br>Wash Cold / No Drying Machine</p>
-  <a class="buy" id="go" href="https://yacxilanartwear.com/products/hooded-long-dress-viscose-ayawaska" rel="noopener">Buy at Yacxilan
+  <a class="buy" id="go" href="https://yacxilanartwear.com/products/hooded-long-dress-viscose-ayawaska" rel="noopener"
+     data-item="dress" data-brand="yacxilan">Buy at Yacxilan
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
   <p class="note">Every picture on this page is AI-generated and for illustration only. For the exact appearance of the piece, see the seller&rsquo;s own photographs on their page, where prices, sizes and availability are also shown and where delivery costs and any taxes may be added at checkout. Nothing is sold from this site. Some links may earn a commission, at no extra cost to you. <a href="/terms">Terms</a> &middot; <a href="/privacy">Privacy</a>.</p>
 </main>
@@ -114,9 +115,7 @@ h1{font-size:clamp(21px,4vw,26px);line-height:1.25;margin:0 0 4px;font-weight:60
       if(dots[j]){ if(j===i){dots[j].setAttribute('data-on','');}
                     else {dots[j].removeAttribute('data-on');} }
     }
-    if(cap){cap.textContent=(i+1)+' of '+ims.length+' · '+
-      (ims[i].getAttribute('data-whose')==='brand'
-        ? 'photograph by Yacxilan Artwear' : 'AI-generated image of Yerin');}
+    if(cap){cap.textContent=(i+1)+' of '+ims.length+' · AI-generated image of Yerin';}
   }
   function stop(){ if(t){clearInterval(t); t=null;} }
   function start(){ stop(); if(!still) t=setInterval(function(){show(i+1);},3800); }
@@ -133,12 +132,17 @@ h1{font-size:clamp(21px,4vw,26px);line-height:1.25;margin:0 0 4px;font-weight:60
 </script>
 <script>
 (function(){
-  var a=document.getElementById('go');
-  if(!a||typeof gtag!=='function')return;
-  a.addEventListener('click',function(){
-    // Fire and forget. The browser keeps a keepalive request alive across the
-    // navigation, and nothing here delays the visitor by even a frame.
-    try{gtag('event','shop_click',{item:'dress',destination:'yacxilan'});}catch(e){}
+  document.addEventListener('click',function(e){
+    if(!e.target||!e.target.closest)return;
+    var a=e.target.closest('a[href]'); if(!a)return;
+    var h; try{ h=new URL(a.href,location.href).host; }catch(err){ return; }
+    if(!h||h===location.host)return;
+    if(typeof gtag!=='function')return;
+    var it=a.getAttribute('data-item');
+    try{
+      if(it) gtag('event','shop_click',{item:it,destination:a.getAttribute('data-brand')||h});
+      else   gtag('event','outbound_click',{destination:h});
+    }catch(err){}
   });
 })();
 </script>

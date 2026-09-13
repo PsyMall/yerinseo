@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yerin Seo</title>
-<meta name="description" content="Fashion, decoded. One outfit a day, why it works, and where to find it.">
+<meta name="description" content="Fashion, decoded. One outfit a day.">
 <meta property="og:title" content="Yerin Seo">
 <meta property="og:description" content="Fashion, decoded. One outfit a day.">
 <meta property="og:image" content="https://yerinseo.com/img/hero.jpg">
@@ -99,10 +99,14 @@ a{color:inherit}
 }
 .hero-figure figcaption{margin-top:10px;font-size:13px;color:var(--muted)}
 
-/* ---------- looks: a rail you swipe, the way the reference does it ---------- */
+/* ---------- the pool: frames that change on their own, each one a way in ----------
+   Mixed shapes on purpose - our newer pictures are 9:16 video frames and the
+   older ones are 3:4 - so the frame is a fixed 4:5 and the picture is CONTAINED
+   inside it on the tint. Cropping to make the shapes agree is what cuts heads
+   off, which is exactly what this band must not do. */
 .band{padding-block:clamp(36px,6vw,72px)}
 .band-head{
-  display:flex;align-items:baseline;justify-content:space-between;
+  display:flex;align-items:center;justify-content:space-between;
   gap:16px;margin-bottom:20px;flex-wrap:wrap;
 }
 .band-head h2{
@@ -110,35 +114,29 @@ a{color:inherit}
   font-size:clamp(26px,4.2vw,40px);margin:0;line-height:1.1;
   padding-bottom:.04em;
 }
-.hint{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);
-  letter-spacing:.14em;text-transform:uppercase}
-.hint svg{opacity:.55}
-
-.rail{
-  display:flex;gap:12px;
-  margin-inline:calc(-1 * var(--gut));
-  padding-inline:var(--gut);
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  scroll-padding-inline:var(--gut);
-  scrollbar-width:none;
-  -webkit-overflow-scrolling:touch;
+.pool{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media (min-width:900px){ .pool{grid-template-columns:repeat(4,1fr)} }
+.cell{
+  position:relative;border-radius:var(--r);overflow:hidden;
+  background:var(--tint);aspect-ratio:4/5;
 }
-.rail::-webkit-scrollbar{display:none}
-.rail figure{
-  margin:0;flex:0 0 74%;scroll-snap-align:start;
-  border-radius:var(--r);overflow:hidden;background:var(--tint);
+.cell .slide{
+  position:absolute;inset:0;display:block;opacity:0;pointer-events:none;
+  transition:opacity .6s ease;
 }
-@media (min-width:640px){ .rail figure{flex-basis:42%} }
-@media (min-width:1000px){
-  .rail figure{flex-basis:calc((100% - 76px) / 4)}
-  .hint{display:none}
-}
-.rail img{
-  width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;
+.cell .slide.on{opacity:1;pointer-events:auto}
+.cell .slide img{
+  width:100%;height:100%;object-fit:contain;
   transition:transform .7s cubic-bezier(.16,1,.3,1);
 }
-@media (hover:hover){ .rail figure:hover img{transform:scale(1.04)} }
+@media (hover:hover){ .cell .slide.on:hover img{transform:scale(1.04)} }
+.pool-pause{
+  border:1px solid var(--hair);border-radius:999px;background:var(--paper);
+  color:var(--ink);font:500 12px/1 var(--sans);padding:9px 14px;cursor:pointer;
+  letter-spacing:.02em;
+}
+.pool-pause:hover{border-color:var(--ink)}
+.pool-note{margin:12px 0 0;font-size:13px;color:var(--muted)}
 
 /* ---------- ai notice: must be legible at first exposure, so it carries no
    reveal animation and no small-print size ---------- */
@@ -150,48 +148,36 @@ a{color:inherit}
 .ai-note strong{font-weight:600}
 .ai-note a{color:var(--muted)}
 
-/* ---------- the shelf: an empty state that says "coming", not "unfinished" ---------- */
+/* ---------- the shelf: a picture and a name, and the card opens the page ---------- */
 .shelf-band{background:var(--tint)}
-.shelf{display:grid;gap:14px;max-width:54ch}
+.shelf{display:grid;gap:14px}
 .shelf h2{font-family:var(--display);font-weight:400;font-size:clamp(22px,3.2vw,30px);
-  margin:0;line-height:1.15;padding-bottom:.04em}
-.shelf p{margin:0;color:var(--muted);font-size:15px}
-.shelf{max-width:60ch}
-.items{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:9px}
+  margin:0;line-height:1.15;padding-bottom:.04em;max-width:60ch}
+.shelf p{margin:0;color:var(--muted);font-size:15px;max-width:60ch}
+.items{
+  list-style:none;margin:8px 0 0;padding:0;
+  display:grid;gap:16px;grid-template-columns:repeat(2,1fr);
+}
+@media (min-width:700px){ .items{grid-template-columns:repeat(3,1fr)} }
 .items a{
-  display:flex;align-items:center;justify-content:space-between;gap:14px;
-  text-decoration:none;background:var(--paper);
-  border:1px solid var(--hair);border-radius:var(--r);padding:15px 18px;
-  transition:border-color .2s ease,transform .18s cubic-bezier(.16,1,.3,1);
+  display:block;text-decoration:none;
+  transition:transform .18s cubic-bezier(.16,1,.3,1);
 }
-.items a:hover{border-color:var(--ink)}
 .items a:active{transform:scale(.99)}
-.items .what{display:grid;gap:3px}
-/* The thumbnail is what makes the row findable: the shopper recognises the
-   piece from the video before reading a word of it. */
+/* The picture is what makes the piece findable: the shopper recognises it from
+   the video before reading a word. */
 .items .shot{
-  flex:0 0 auto;width:84px;border-radius:calc(var(--r) - 6px);overflow:hidden;
-  background:var(--tint);
+  display:block;border-radius:var(--r);overflow:hidden;
+  background:var(--paper);margin-bottom:10px;
 }
-.items .shot img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover}
-.items .nm{font-weight:500;line-height:1.3}
-.items .who{font-size:13px;color:var(--muted)}
-.items .desc{font-size:13px;color:var(--muted);line-height:1.45}
-/* A named action reads as an offer; a bare arrow reads as navigation. */
-.items .go{
-  flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;
-  font-size:13px;font-weight:500;letter-spacing:.02em;white-space:nowrap;
-  border:1px solid var(--hair);border-radius:999px;padding:8px 13px;
+.items .shot img{
+  display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;
+  transition:transform .7s cubic-bezier(.16,1,.3,1);
 }
-.items a:hover .go{border-color:var(--ink)}
-.items .go svg{opacity:.55}
-.items svg{flex:0 0 auto;opacity:.45}
-@media (max-width:520px){
-  .items a{flex-wrap:wrap;align-items:flex-start;gap:12px}
-  .items .what{flex:1 1 55%}
-  .items .go{flex:1 1 100%;justify-content:center}
-}
-.maker{margin:0;font-size:14px}
+@media (hover:hover){ .items a:hover .shot img{transform:scale(1.04)} }
+.items .nm{display:block;font-weight:500;line-height:1.3;font-size:15px}
+.items .who{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.maker{font-size:14px}
 .maker a{font-weight:500}
 .plain{font-size:13px;color:var(--muted);margin-top:4px}
 
@@ -234,22 +220,30 @@ footer{
 <!-- measurement -->
 <script>
   // Honour an opt-out chosen on the privacy page before the tag can fire.
+  // Braces are doubled because this block goes through str.format.
   try{ if(localStorage.getItem('yerinseo-analytics-off')==='1')
         window['ga-disable-G-MQ8PVH2VNM']=true; }catch(e){}
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MQ8PVH2VNM"></script>
 <script>
   window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+  // Consent Mode, denied by default. This is the documented mechanism and it is
+  // the one that actually works: GA4 then sends COOKIELESS PINGS - it counts the
+  // page view and the event, and writes nothing to the device. `client_storage`
+  // alone did NOT stop the cookies; measured on the live site, _ga and
+  // _ga_<id> were still being set with that flag present and correct.
   gtag('consent','default',{
     analytics_storage:'denied', ad_storage:'denied',
     ad_user_data:'denied', ad_personalization:'denied'
   });
   gtag('js',new Date());
   gtag('config','G-MQ8PVH2VNM',{client_storage:'none',anonymize_ip:true,allow_google_signals:false,allow_ad_personalization_signals:false});
-  // One named event per product, so the report answers "which piece" and not
-  // only "how many". The page path answers it too; the event is the one that
-  // survives someone changing the path later.
-  gtag('event','page_view_home',{item:'home',destination:'yacxilan'});
+</script>
+<script>
+  // One named event for the home page. The page path answers "was the home page
+  // opened" too; the event is the one that survives someone changing the path
+  // later, and the privacy page lists it by name.
+  if(typeof gtag==='function') gtag('event','page_view_home',{item:'home',destination:'yacxilan'});
 </script>
 </head>
 <body>
@@ -266,7 +260,7 @@ footer{
         <p class="ai-note"><strong>Yerin is a digital character, and every picture and video here is generated by AI.</strong> She is not a real person, and the images are for illustration only. <a href="/terms">Terms</a>.</p>
       </div>
       <figure class="hero-figure rise d1">
-        <img src="img/hero.jpg" alt="AI-generated image of Yerin on painted steps in layered denim over a white tank" fetchpriority="high" width="1100" height="1375">
+        <img src="img/hero.jpg" alt="AI-generated image of Yerin in a hooded printed dress at the roots of a jungle tree at sunrise" fetchpriority="high" width="1100" height="1375">
       </figure>
     </div>
   </div>
@@ -275,17 +269,25 @@ footer{
 <section class="band shell reveal">
   <div class="band-head">
     <h2>Recent looks</h2>
-    <span class="hint">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg>
-      Swipe
-    </span>
+    <button class="pool-pause" id="poolpause" type="button" aria-label="Pause the pictures">&#10073;&#10073; Pause</button>
   </div>
-  <div class="rail" tabindex="0" role="region" aria-label="Recent looks, scroll sideways">
-    <figure><img src="img/look-a.jpg" alt="AI-generated image of Yerin in a red slip dress against red silk curtains" loading="lazy" width="900" height="1200"></figure>
-    <figure><img src="img/look-b.jpg" alt="AI-generated image of Yerin in a teal pleated gown at a waterfall" loading="lazy" width="900" height="1200"></figure>
-    <figure><img src="img/look-c.jpg" alt="AI-generated image of Yerin in a graffiti-print puffer on a neon-lit street" loading="lazy" width="900" height="1200"></figure>
-    <figure><img src="img/look-d.jpg" alt="AI-generated image of Yerin in a butter-yellow slip dress in golden light" loading="lazy" width="900" height="1200"></figure>
+  <div class="pool" id="pool">
+      <div class="cell" data-i="0">
+        <a class="slide on" href="https://yacxilanartwear.com/products/hooded-long-dress-viscose-ayawaska" rel="noopener" data-item="dress" data-brand="yacxilan" tabindex="0"><img src="img/dress-yerin-1.jpg" alt="AI-generated image of the hooded dress worn, seen from the front, hood up"></a>
+        <a class="slide" href="https://yacxilanartwear.com/products/hooded-long-dress-viscose-ayawaska" rel="noopener" data-item="dress" data-brand="yacxilan" tabindex="-1" aria-hidden="true"><img src="img/dress-yerin-3.jpg" alt="AI-generated image of the hooded dress worn, seen from behind, hood up" loading="lazy"></a>
+      </div>
+      <div class="cell" data-i="0">
+        <a class="slide on" href="https://yacxilanartwear.com/products/jacket-sleeveless-hooded-velvet-waterproof-mayan-codex" rel="noopener" data-item="jacket" data-brand="yacxilan" tabindex="0"><img src="img/shelf-jacket.jpg" alt="AI-generated image of the hooded jacket worn, hood up, showing the studded shoulders and the front zip"></a>
+        <a class="slide" href="https://yacxilanartwear.com/products/hooded-long-dress-viscose-ayawaska" rel="noopener" data-item="dress" data-brand="yacxilan" tabindex="-1" aria-hidden="true"><img src="img/dress-yerin-4.jpg" alt="AI-generated image of the hooded dress worn, right profile, full length" loading="lazy"></a>
+      </div>
+      <div class="cell" data-i="0">
+        <a class="slide on" href="https://yacxilanartwear.com/products/long-leggings-woman-bamboo-jersey-veg-dye-veg-print-charcoal-sandsotime" rel="noopener" data-item="leggings" data-brand="yacxilan" tabindex="0"><img src="img/shelf-leggings.jpg" alt="AI-generated image of the printed leggings worn, seen from behind, from the waist to the ankle"></a>
+      </div>
+      <div class="cell" data-i="0">
+        <a class="slide on" href="https://yacxilanartwear.com/products/hooded-long-dress-viscose-ayawaska" rel="noopener" data-item="dress" data-brand="yacxilan" tabindex="0"><img src="img/dress-yerin-2.jpg" alt="AI-generated image of the hooded dress worn, left profile, showing the open side slit"></a>
+      </div>
   </div>
+  <p class="pool-note">Every picture opens the piece at the maker.</p>
 </section>
 
 <section class="shelf-band reveal">
@@ -296,36 +298,24 @@ footer{
       <p class="maker">Every piece here is sold by <a href="/shop" rel="noopener">Yacxilan Artwear</a>, an independent artwear house. Their product pages show the exact appearance of each piece.</p>
       <ul class="items">
         <li>
-          <a href="/dress" rel="noopener">
+          <a href="/dress">
             <span class="shot"><img src="img/shelf-dress.jpg" alt="AI-generated image of the hooded dress worn, seen from the front, hood up" loading="lazy" width="900" height="1200"></span>
-            <span class="what">
-              <span class="nm">Hooded Long Dress &mdash; AYAWASKA</span>
-              <span class="who">Yacxilan Artwear</span>
-              <span class="desc">Viscose / All Over Digital Print Note: All pieces are randomly cut from the printed textiles and details of the prints might not be always same place as in the picture. that makes every piece unique. Wash Cold / No Drying Machine</span>
-            </span>
-            <span class="go">Buy at Yacxilan <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+            <span class="nm">Hooded Long Dress &mdash; AYAWASKA</span>
+            <span class="who">Yacxilan Artwear</span>
           </a>
         </li>
         <li>
-          <a href="/jacket" rel="noopener">
+          <a href="/jacket">
             <span class="shot"><img src="img/shelf-jacket.jpg" alt="AI-generated image of the hooded jacket worn, hood up, showing the studded shoulders and the front zip" loading="lazy" width="900" height="1200"></span>
-            <span class="what">
-              <span class="nm">Sleeveless Hooded Jacket &mdash; Mayan Codex</span>
-              <span class="who">Yacxilan Artwear</span>
-              <span class="desc">Wonderful tough Velvet Waterproof Fabric with top quality 100% Viscose Linning.</span>
-            </span>
-            <span class="go">Buy at Yacxilan <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+            <span class="nm">Sleeveless Hooded Jacket &mdash; Mayan Codex</span>
+            <span class="who">Yacxilan Artwear</span>
           </a>
         </li>
         <li>
-          <a href="/leggings" rel="noopener">
+          <a href="/leggings">
             <span class="shot"><img src="img/shelf-leggings.jpg" alt="AI-generated image of the printed leggings worn, seen from behind, from the waist to the ankle" loading="lazy" width="900" height="1200"></span>
-            <span class="what">
-              <span class="nm">Long Leggings &mdash; Sandsotime Charcoal</span>
-              <span class="who">Yacxilan Artwear</span>
-              <span class="desc">Best Yogawear Long Leggings made with top Notch Bamboo Jersey Material Veg Dyed Veg Printed. This is the New Collection Totally Vegan, No fixatives, No Quemicals, Nothing Harmful to You or to Nature! Wash Cold / No Drying Machine</span>
-            </span>
-            <span class="go">Buy at Yacxilan <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+            <span class="nm">Long Leggings &mdash; Sandsotime Charcoal</span>
+            <span class="who">Yacxilan Artwear</span>
           </a>
         </li>
       </ul>
@@ -377,6 +367,85 @@ footer{
 
   // Safety net: nothing stays hidden for more than a moment, whatever happens.
   setTimeout(() => els.forEach(e => e.classList.add('in')), 2500);
+})();
+</script>
+
+<script>
+// The pool of pictures at the top of the page changes on its own.
+//
+// Each frame walks its own short stack, and the frames are started a beat apart
+// so the band never flips as one block. The pause button stops all of them,
+// which is the control WCAG 2.2.2 requires for anything that moves for more
+// than five seconds, and a visitor who has asked their device for less motion
+// gets a still band and a play button instead.
+//
+// The slide that is showing is the only one a keyboard can reach: the rest are
+// taken out of the tab order and hidden from the screen reader as they fade, or
+// a tab press would walk through a stack of invisible links.
+(function(){
+  var pool=document.getElementById('pool'); if(!pool)return;
+  var cells=pool.querySelectorAll('.cell');
+  var btn=document.getElementById('poolpause');
+  var still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var timers=[], running=false;
+
+  function paint(cell,k){
+    var sl=cell.querySelectorAll('.slide');
+    for(var j=0;j<sl.length;j++){
+      var on=(j===k);
+      sl[j].classList.toggle('on',on);
+      sl[j].setAttribute('tabindex',on?'0':'-1');
+      if(on){ sl[j].removeAttribute('aria-hidden'); }
+      else  { sl[j].setAttribute('aria-hidden','true'); }
+    }
+    cell.setAttribute('data-i',k);
+  }
+  function stop(){
+    for(var i=0;i<timers.length;i++){ clearTimeout(timers[i]); clearInterval(timers[i]); }
+    timers=[]; running=false;
+  }
+  function start(){
+    stop();
+    for(var n=0;n<cells.length;n++){
+      (function(cell,n){
+        var sl=cell.querySelectorAll('.slide');
+        if(sl.length<2)return;
+        timers.push(setTimeout(function(){
+          timers.push(setInterval(function(){
+            var i=parseInt(cell.getAttribute('data-i'),10)||0;
+            paint(cell,(i+1)%sl.length);
+          },4200));
+        },900*n));
+      })(cells[n],n);
+    }
+    running=true;
+  }
+  function label(){
+    if(!btn)return;
+    btn.innerHTML = running ? '&#10073;&#10073; Pause' : '&#9654; Play';
+    btn.setAttribute('aria-label', running ? 'Pause the pictures' : 'Play the pictures');
+  }
+  for(var i=0;i<cells.length;i++){ paint(cells[i],0); }
+  if(!still) start();
+  label();
+  if(btn) btn.addEventListener('click',function(){ if(running){stop();}else{start();} label(); });
+})();
+</script>
+
+<script>
+(function(){
+  document.addEventListener('click',function(e){
+    if(!e.target||!e.target.closest)return;
+    var a=e.target.closest('a[href]'); if(!a)return;
+    var h; try{ h=new URL(a.href,location.href).host; }catch(err){ return; }
+    if(!h||h===location.host)return;
+    if(typeof gtag!=='function')return;
+    var it=a.getAttribute('data-item');
+    try{
+      if(it) gtag('event','shop_click',{item:it,destination:a.getAttribute('data-brand')||h});
+      else   gtag('event','outbound_click',{destination:h});
+    }catch(err){}
+  });
 })();
 </script>
 </body>
