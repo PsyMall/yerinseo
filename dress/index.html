@@ -21,13 +21,16 @@ a{color:inherit}
 .back:hover{color:var(--ink)}
 figure{margin:0 0 18px}
 .frame{position:relative;border-radius:16px;overflow:hidden;background:var(--tint)}
-.frame img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:contain}
-.frame img[hidden]{display:none}
-.nav{position:absolute;inset:0;display:flex;align-items:center;
-  justify-content:space-between;padding:0 8px;pointer-events:none}
-.nav button{pointer-events:auto;width:40px;height:40px;border:0;border-radius:999px;
-  background:rgba(255,255,255,.9);color:var(--ink);font:600 18px/1 Inter,sans-serif;
-  cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.18)}
+.tap{display:block;width:100%;margin:0;padding:0;border:0;background:none;
+  cursor:pointer;position:relative;aspect-ratio:4/5}
+.tap img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
+  opacity:0;transition:opacity .45s ease}
+.tap img.on{opacity:1}
+.one img{position:static;opacity:1;display:block;width:100%;height:auto;
+  aspect-ratio:4/5;object-fit:contain}
+.pause{position:absolute;right:10px;bottom:10px;width:34px;height:34px;border:0;
+  border-radius:999px;background:rgba(255,255,255,.92);color:var(--ink);
+  font:600 12px/1 Inter,sans-serif;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.18)}
 .dots{display:flex;gap:6px;justify-content:center;margin:10px 0 0}
 .dots span{width:6px;height:6px;border-radius:999px;background:var(--hair)}
 .dots span[data-on]{background:var(--ink)}
@@ -69,14 +72,13 @@ h1{font-size:clamp(21px,4vw,26px);line-height:1.25;margin:0 0 4px;font-weight:60
   <a class="back" href="/">&#8592; Yerin Seo</a>
   <figure id="gal">
     <div class="frame">
-      <img src="/img/dress-yerin-1.jpg" alt="AI-generated image of the hooded dress worn, seen from the front, hood up" data-whose="yerin">
-      <img src="/img/dress-yerin-2.jpg" alt="AI-generated image of the hooded dress worn, left profile, showing the open side slit" data-whose="yerin" hidden loading="lazy">
-      <img src="/img/dress-yerin-3.jpg" alt="AI-generated image of the hooded dress worn, seen from behind, hood up" data-whose="yerin" hidden loading="lazy">
-      <img src="/img/dress-yerin-4.jpg" alt="AI-generated image of the hooded dress worn, right profile, full length" data-whose="yerin" hidden loading="lazy">
-      <div class="nav">
-        <button class="prev" type="button" aria-label="Previous picture">&#8249;</button>
-        <button class="next" type="button" aria-label="Next picture">&#8250;</button>
-      </div>
+      <button class="tap" type="button" aria-label="Show the next picture">
+        <img src="/img/dress-yerin-1.jpg" alt="AI-generated image of the hooded dress worn, seen from the front, hood up" data-whose="yerin" class="on">
+        <img src="/img/dress-yerin-2.jpg" alt="AI-generated image of the hooded dress worn, left profile, showing the open side slit" data-whose="yerin" class="" loading="lazy">
+        <img src="/img/dress-yerin-3.jpg" alt="AI-generated image of the hooded dress worn, seen from behind, hood up" data-whose="yerin" class="" loading="lazy">
+        <img src="/img/dress-yerin-4.jpg" alt="AI-generated image of the hooded dress worn, right profile, full length" data-whose="yerin" class="" loading="lazy">
+      </button>
+      <button class="pause" type="button" aria-label="Pause the pictures">&#10073;&#10073;</button>
     </div>
     <p class="dots" aria-hidden="true"><span data-on></span><span></span><span></span><span></span></p>
     <figcaption>1 of 4 &middot; AI-generated image of Yerin</figcaption>
@@ -89,19 +91,26 @@ h1{font-size:clamp(21px,4vw,26px);line-height:1.25;margin:0 0 4px;font-weight:60
   <p class="note">Every picture on this page is AI-generated and for illustration only. For the exact appearance of the piece, see the seller&rsquo;s own photographs on their page, where prices, sizes and availability are also shown and where delivery costs and any taxes may be added at checkout. Nothing is sold from this site. Some links may earn a commission, at no extra cost to you. <a href="/terms">Terms</a> &middot; <a href="/privacy">Privacy</a>.</p>
 </main>
 <script>
-// Manual prev/next only. Nothing advances on its own: an auto-advancing
-// carousel needs a pause control to satisfy WCAG 2.2.2, and it buys a garment
-// page nothing at all.
+// The pictures change by themselves, and a tap anywhere on the picture moves to
+// the next one (Moti, 13/09/2026).
+//
+// TWO THINGS THAT ARE NOT DECORATION. Anything that moves on its own for more
+// than five seconds needs a way to stop it - WCAG 2.2.2 - so there is a real
+// pause button, and it is the tap target's sibling rather than something hidden
+// on hover, because on a phone there is no hover. And a visitor who has asked
+// their device for less motion gets the gallery held on the first picture: the
+// timer never starts and the crossfade never runs.
 (function(){
   var f=document.getElementById('gal'); if(!f)return;
-  var ims=f.querySelectorAll('img'), dots=f.querySelectorAll('.dots span'),
-      cap=f.querySelector('figcaption'), i=0;
-  var prev=f.querySelector('.prev'), next=f.querySelector('.next');
-  if(!prev||!next||ims.length<2)return;
+  var tap=f.querySelector('.tap'); if(!tap)return;
+  var ims=f.querySelectorAll('.tap img'), dots=f.querySelectorAll('.dots span'),
+      cap=f.querySelector('figcaption'), pause=f.querySelector('.pause'), i=0, t=null;
+  if(ims.length<2)return;
+  var still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function show(k){
     i=(k+ims.length)%ims.length;
     for(var j=0;j<ims.length;j++){
-      ims[j].hidden=(j!==i);
+      ims[j].classList.toggle('on',j===i);
       if(dots[j]){ if(j===i){dots[j].setAttribute('data-on','');}
                     else {dots[j].removeAttribute('data-on');} }
     }
@@ -109,9 +118,17 @@ h1{font-size:clamp(21px,4vw,26px);line-height:1.25;margin:0 0 4px;font-weight:60
       (ims[i].getAttribute('data-whose')==='brand'
         ? 'photograph by Yacxilan Artwear' : 'AI-generated image of Yerin');}
   }
-  prev.addEventListener('click',function(){show(i-1);});
-  next.addEventListener('click',function(){show(i+1);});
-  show(0);
+  function stop(){ if(t){clearInterval(t); t=null;} }
+  function start(){ stop(); if(!still) t=setInterval(function(){show(i+1);},3800); }
+  tap.addEventListener('click',function(){ show(i+1); if(t) start(); });
+  if(pause){
+    if(still){ pause.textContent='▶'; pause.setAttribute('aria-label','Play the pictures'); }
+    pause.addEventListener('click',function(){
+      if(t){ stop(); pause.textContent='▶'; pause.setAttribute('aria-label','Play the pictures'); }
+      else { start(); pause.textContent='❙❙'; pause.setAttribute('aria-label','Pause the pictures'); }
+    });
+  }
+  show(0); start();
 })();
 </script>
 <script>
