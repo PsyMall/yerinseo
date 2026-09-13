@@ -19,8 +19,19 @@ a{color:inherit}
 .back{display:inline-block;font-size:13px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--muted);text-decoration:none;margin-bottom:22px}
 .back:hover{color:var(--ink)}
-figure{margin:0 0 18px;border-radius:16px;overflow:hidden;background:var(--tint)}
-figure img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover}
+figure{margin:0 0 18px}
+.frame{position:relative;border-radius:16px;overflow:hidden;background:var(--tint)}
+.frame img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:contain}
+.frame img[hidden]{display:none}
+.nav{position:absolute;inset:0;display:flex;align-items:center;
+  justify-content:space-between;padding:0 8px;pointer-events:none}
+.nav button{pointer-events:auto;width:40px;height:40px;border:0;border-radius:999px;
+  background:rgba(255,255,255,.9);color:var(--ink);font:600 18px/1 Inter,sans-serif;
+  cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.18)}
+.dots{display:flex;gap:6px;justify-content:center;margin:10px 0 0}
+.dots span{width:6px;height:6px;border-radius:999px;background:var(--hair)}
+.dots span[data-on]{background:var(--ink)}
+figcaption{margin:8px 0 0;font-size:12px;color:var(--muted);text-align:center}
 h1{font-size:clamp(21px,4vw,26px);line-height:1.25;margin:0 0 4px;font-weight:600}
 .who{margin:0 0 14px;color:var(--muted);font-size:14px}
 .desc{margin:0 0 20px;color:var(--muted);font-size:15px}
@@ -29,9 +40,6 @@ h1{font-size:clamp(21px,4vw,26px);line-height:1.25;margin:0 0 4px;font-weight:60
   border-radius:999px;padding:16px 22px;margin:0 0 14px}
 .buy:active{transform:scale(.99)}
 .note{margin:0;font-size:13px;color:var(--muted)}
-.was{color:var(--muted);font-weight:400}
-.avail{margin:0 0 20px;font-size:14px;line-height:1.5;color:var(--ink);
-  background:var(--tint);border-radius:12px;padding:12px 15px}
 :focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
 </style>
 <script>
@@ -59,15 +67,53 @@ h1{font-size:clamp(21px,4vw,26px);line-height:1.25;margin:0 0 4px;font-weight:60
 <body>
 <main>
   <a class="back" href="/">&#8592; Yerin Seo</a>
-  <figure><img src="/img/shelf-jacket.jpg" alt="AI-generated image of the hooded jacket worn, hood up, showing the studded shoulders and the front zip" width="900" height="1200"></figure>
+  <figure id="gal">
+    <div class="frame">
+      <img src="/img/shelf-jacket.jpg" alt="AI-generated image of the hooded jacket worn, hood up, showing the studded shoulders and the front zip" data-whose="yerin">
+      <img src="/img/jacket-brand-1.jpg" alt="The maker&rsquo;s photograph of the sleeveless hooded jacket" data-whose="brand" hidden loading="lazy">
+      <img src="/img/jacket-brand-2.jpg" alt="The maker&rsquo;s photograph of the jacket, showing the velvet and the studded shoulders" data-whose="brand" hidden loading="lazy">
+      <img src="/img/jacket-brand-3.jpg" alt="The maker&rsquo;s photograph of the jacket, showing the viscose lining" data-whose="brand" hidden loading="lazy">
+      <div class="nav">
+        <button class="prev" type="button" aria-label="Previous picture">&#8249;</button>
+        <button class="next" type="button" aria-label="Next picture">&#8250;</button>
+      </div>
+    </div>
+    <p class="dots" aria-hidden="true"><span data-on></span><span></span><span></span><span></span></p>
+    <figcaption>1 of 4 &middot; AI-generated image of Yerin</figcaption>
+  </figure>
   <h1>Sleeveless Hooded Jacket &mdash; Mayan Codex</h1>
-  <p class="who">Yacxilan Artwear &nbsp;&middot;&nbsp; &euro;235</p>
-  <p class="desc">Velvet waterproof outer with a 100% viscose lining. Sizes XS&ndash;2XL.</p>
-  <p class="avail">Every size was listed at the seller on 13 September 2026, when this page was built. Their page is the current one.</p>
+  <p class="who">Yacxilan Artwear</p>
+  <p class="desc">Wonderful tough Velvet Waterproof Fabric with top quality 100% Viscose Linning.</p>
   <a class="buy" id="go" href="https://yacxilanartwear.com/products/jacket-sleeveless-hooded-velvet-waterproof-mayan-codex" rel="noopener">Buy at Yacxilan
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
-  <p class="note">This image is AI-generated and for illustration only. For the exact appearance, see the seller&rsquo;s pages. Any price or sizes shown above were read from the seller&rsquo;s page on 13 September 2026, and delivery costs and any taxes may be added at their checkout. Nothing is sold from this site; stock, availability and pricing remain the seller&rsquo;s alone. Some links may earn a commission, at no extra cost to you. <a href="/terms">Terms</a> &middot; <a href="/privacy">Privacy</a>.</p>
+  <p class="note">The pictures of Yerin are AI-generated and for illustration only; the seller&rsquo;s own photographs are marked as theirs. For the exact appearance, see the seller&rsquo;s pages. Prices, sizes and availability are shown there, where delivery costs and any taxes may be added at checkout. Nothing is sold from this site. Some links may earn a commission, at no extra cost to you. <a href="/terms">Terms</a> &middot; <a href="/privacy">Privacy</a>.</p>
 </main>
+<script>
+// Manual prev/next only. Nothing advances on its own: an auto-advancing
+// carousel needs a pause control to satisfy WCAG 2.2.2, and it buys a garment
+// page nothing at all.
+(function(){
+  var f=document.getElementById('gal'); if(!f)return;
+  var ims=f.querySelectorAll('img'), dots=f.querySelectorAll('.dots span'),
+      cap=f.querySelector('figcaption'), i=0;
+  var prev=f.querySelector('.prev'), next=f.querySelector('.next');
+  if(!prev||!next||ims.length<2)return;
+  function show(k){
+    i=(k+ims.length)%ims.length;
+    for(var j=0;j<ims.length;j++){
+      ims[j].hidden=(j!==i);
+      if(dots[j]){ if(j===i){dots[j].setAttribute('data-on','');}
+                    else {dots[j].removeAttribute('data-on');} }
+    }
+    if(cap){cap.textContent=(i+1)+' of '+ims.length+' · '+
+      (ims[i].getAttribute('data-whose')==='brand'
+        ? 'photograph by Yacxilan Artwear' : 'AI-generated image of Yerin');}
+  }
+  prev.addEventListener('click',function(){show(i-1);});
+  next.addEventListener('click',function(){show(i+1);});
+  show(0);
+})();
+</script>
 <script>
 (function(){
   var a=document.getElementById('go');
